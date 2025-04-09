@@ -31,8 +31,8 @@ const LoginForm = () => {
           // Simpan token simulasi di localStorage
           localStorage.setItem("adminToken", "dummy-token-for-frontend-only");
           
-          // Redirect ke dashboard admin (akan dibuat nanti)
-          navigate("/");
+          // Redirect ke dashboard admin
+          navigate("/admin");
         } else {
           // Login gagal
           toast({
