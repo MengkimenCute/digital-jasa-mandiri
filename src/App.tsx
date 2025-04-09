@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Index from "./pages/Index";
 import Layanan from "./pages/Layanan";
+import LayananDetail from "./pages/LayananDetail";
 import Portofolio from "./pages/Portofolio";
 import TentangKami from "./pages/TentangKami";
 import Kontak from "./pages/Kontak";
@@ -25,6 +26,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Layout><Index /></Layout>} />
           <Route path="/layanan" element={<Layout><Layanan /></Layout>} />
+          <Route path="/layanan/:id" element={<Layout><LayananDetail /></Layout>} />
           <Route path="/portofolio" element={<Layout><Portofolio /></Layout>} />
           <Route path="/tentang-kami" element={<Layout><TentangKami /></Layout>} />
           <Route path="/kontak" element={<Layout><Kontak /></Layout>} />

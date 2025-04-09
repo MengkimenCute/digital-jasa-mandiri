@@ -8,18 +8,21 @@ import { toast } from "@/hooks/use-toast";
 
 const services = [
   {
+    id: "website",
     title: "Pembuatan Website",
     description: "Website responsif dan modern untuk kebutuhan bisnis Anda",
     icon: <Laptop className="h-10 w-10 text-blue-600" />,
     link: "/layanan/website"
   },
   {
+    id: "aplikasi",
     title: "Pengembangan Aplikasi",
     description: "Aplikasi mobile & web yang disesuaikan dengan kebutuhan spesifik",
     icon: <Code className="h-10 w-10 text-blue-600" />,
     link: "/layanan/aplikasi"
   },
   {
+    id: "konsultasi",
     title: "Konsultasi IT",
     description: "Solusi dan strategi terbaik untuk transformasi digital bisnis Anda",
     icon: <MessageSquare className="h-10 w-10 text-blue-600" />,
@@ -100,9 +103,11 @@ const Index = () => {
                 <Button size="lg" onClick={handleWhatsAppClick} className="bg-green-600 hover:bg-green-700">
                   Hubungi via WhatsApp
                 </Button>
-                <Button size="lg" variant="outline" className="bg-transparent text-white border-white hover:bg-white/10">
-                  Lihat Portofolio
-                </Button>
+                <Link to="/portofolio">
+                  <Button size="lg" variant="outline" className="bg-transparent text-white border-white hover:bg-white/10">
+                    Lihat Portofolio
+                  </Button>
+                </Link>
               </div>
             </div>
             <div className="w-full md:w-1/2">
@@ -126,8 +131,8 @@ const Index = () => {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <Card key={index} className="border-none shadow-lg hover:shadow-xl transition-shadow">
+            {services.map((service) => (
+              <Card key={service.id} className="border-none shadow-lg hover:shadow-xl transition-shadow">
                 <CardHeader>
                   <div className="mb-4">{service.icon}</div>
                   <CardTitle className="text-xl font-bold">{service.title}</CardTitle>
@@ -142,6 +147,11 @@ const Index = () => {
                 </CardFooter>
               </Card>
             ))}
+          </div>
+          <div className="text-center mt-8">
+            <Link to="/layanan" className="inline-flex items-center text-blue-600 hover:text-blue-800">
+              Lihat Semua Layanan <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
           </div>
         </div>
       </section>
