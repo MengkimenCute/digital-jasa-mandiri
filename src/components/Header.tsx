@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Briefcase } from "lucide-react";
 import { Button } from "./ui/button";
 
 const menuItems = [
@@ -9,6 +9,7 @@ const menuItems = [
   { text: "Layanan", path: "/layanan" },
   { text: "Portofolio", path: "/portofolio" },
   { text: "Tentang Kami", path: "/tentang-kami" },
+  { text: "Karir", path: "/karir", icon: Briefcase }, // Tambah menu Karir
   { text: "Kontak", path: "/kontak" },
 ];
 
@@ -46,15 +47,16 @@ const Header = () => {
         <nav className="hidden md:flex items-center space-x-8">
           <ul className="flex space-x-8">
             {menuItems.map((item) => (
-              <li key={item.path}>
+              <li key={item.path} className="flex items-center">
                 <Link
                   to={item.path}
-                  className={`text-sm font-medium transition-colors ${
+                  className={`text-sm font-medium transition-colors flex items-center gap-2 ${
                     location.pathname === item.path
                       ? "text-blue-600"
                       : "text-gray-700 hover:text-blue-600"
                   }`}
                 >
+                  {item.icon && <item.icon size={16} />}
                   {item.text}
                 </Link>
               </li>
@@ -82,15 +84,16 @@ const Header = () => {
           <nav className="container mx-auto px-4 py-4">
             <ul className="space-y-4">
               {menuItems.map((item) => (
-                <li key={item.path}>
+                <li key={item.path} className="flex items-center">
                   <Link
                     to={item.path}
-                    className={`block py-2 text-sm font-medium ${
+                    className={`block py-2 text-sm font-medium flex items-center gap-2 ${
                       location.pathname === item.path
                         ? "text-blue-600"
                         : "text-gray-700"
                     }`}
                   >
+                    {item.icon && <item.icon size={16} />}
                     {item.text}
                   </Link>
                 </li>
@@ -111,3 +114,4 @@ const Header = () => {
 };
 
 export default Header;
+
