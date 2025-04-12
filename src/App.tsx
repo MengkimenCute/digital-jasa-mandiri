@@ -13,6 +13,8 @@ import LayananDetail from "./pages/LayananDetail";
 import Portofolio from "./pages/Portofolio";
 import TentangKami from "./pages/TentangKami";
 import Kontak from "./pages/Kontak";
+import Karir from "./pages/Karir";
+import KarirDetail from "./pages/KarirDetail";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 
@@ -21,6 +23,7 @@ import Dashboard from "./pages/admin/Dashboard";
 import AdminLayanan from "./pages/admin/AdminLayanan";
 import AdminPengguna from "./pages/admin/AdminPengguna";
 import AdminBlog from "./pages/admin/AdminBlog";
+import AdminKarir from "./pages/admin/AdminKarir";
 import AdminPengaturan from "./pages/admin/AdminPengaturan";
 
 const queryClient = new QueryClient();
@@ -39,6 +42,8 @@ const App = () => (
           <Route path="/portofolio" element={<Layout><Portofolio /></Layout>} />
           <Route path="/tentang-kami" element={<Layout><TentangKami /></Layout>} />
           <Route path="/kontak" element={<Layout><Kontak /></Layout>} />
+          <Route path="/karir" element={<Layout><Karir /></Layout>} />
+          <Route path="/karir/:id" element={<Layout><KarirDetail /></Layout>} />
           <Route path="/login" element={<Login />} />
           
           {/* Admin Routes */}
@@ -46,6 +51,7 @@ const App = () => (
           <Route path="/admin/layanan" element={<DashboardLayout><AdminLayanan /></DashboardLayout>} />
           <Route path="/admin/pengguna" element={<DashboardLayout><AdminPengguna /></DashboardLayout>} />
           <Route path="/admin/blog" element={<DashboardLayout><AdminBlog /></DashboardLayout>} />
+          <Route path="/admin/karir" element={<DashboardLayout><AdminKarir /></DashboardLayout>} />
           <Route path="/admin/pengaturan" element={<DashboardLayout><AdminPengaturan /></DashboardLayout>} />
           
           {/* Catch-all route */}

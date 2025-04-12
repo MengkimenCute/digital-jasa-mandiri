@@ -3,7 +3,7 @@ import { ReactNode, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
-import { Home, Newspaper, Settings, LayoutDashboard, Users, FileText, LogOut } from "lucide-react";
+import { Home, Newspaper, Settings, LayoutDashboard, Users, FileText, LogOut, Briefcase } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 interface DashboardLayoutProps {
@@ -66,6 +66,16 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
                 <Button 
                   variant="ghost" 
                   className="w-full justify-start" 
+                  onClick={() => navigate("/admin/karir")}
+                >
+                  <Briefcase className="mr-2 h-4 w-4" />
+                  Lowongan Kerja
+                </Button>
+              </li>
+              <li>
+                <Button 
+                  variant="ghost" 
+                  className="w-full justify-start" 
                   onClick={() => navigate("/admin/pengguna")}
                 >
                   <Users className="mr-2 h-4 w-4" />
@@ -110,7 +120,7 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
       
       {/* Mobile Sidebar */}
       <div className="fixed bottom-0 left-0 z-50 w-full border-t border-gray-200 bg-white md:hidden">
-        <div className="grid h-16 grid-cols-5">
+        <div className="grid h-16 grid-cols-6">
           <Button variant="ghost" className="justify-center" onClick={() => navigate("/admin")}>
             <div className="flex flex-col items-center">
               <LayoutDashboard className="h-5 w-5" />
@@ -122,6 +132,13 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
             <div className="flex flex-col items-center">
               <FileText className="h-5 w-5" />
               <span className="text-xs">Layanan</span>
+            </div>
+          </Button>
+          
+          <Button variant="ghost" className="justify-center" onClick={() => navigate("/admin/karir")}>
+            <div className="flex flex-col items-center">
+              <Briefcase className="h-5 w-5" />
+              <span className="text-xs">Karir</span>
             </div>
           </Button>
           
