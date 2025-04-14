@@ -15,6 +15,7 @@ import TentangKami from "./pages/TentangKami";
 import Kontak from "./pages/Kontak";
 import Karir from "./pages/Karir";
 import KarirDetail from "./pages/KarirDetail";
+import JadwalKonsultasi from "./pages/JadwalKonsultasi";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 
@@ -44,6 +45,7 @@ const App = () => (
           <Route path="/kontak" element={<Layout><Kontak /></Layout>} />
           <Route path="/karir" element={<Layout><Karir /></Layout>} />
           <Route path="/karir/:id" element={<Layout><KarirDetail /></Layout>} />
+          <Route path="/jadwal-konsultasi" element={<Layout><JadwalKonsultasi /></Layout>} />
           <Route path="/login" element={<Login />} />
           
           {/* Admin Routes */}
