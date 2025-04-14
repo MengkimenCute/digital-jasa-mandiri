@@ -45,57 +45,47 @@ const Header = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
         isScrolled 
-          ? "bg-white/95 backdrop-blur-sm shadow-md py-2" 
-          : "bg-transparent py-4"
+          ? "bg-white shadow-md py-2" 
+          : "bg-blue-600 py-4"
       }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         <Link 
           to="/" 
-          className="text-2xl font-bold text-blue-600"
+          className={`text-2xl font-bold ${isScrolled ? "text-blue-600" : "text-white"}`}
         >
           TechConsult
         </Link>
 
-        <div className="hidden md:block">
-          <NavigationMenu>
-            <NavigationMenuList>
-              {menuItems.map((item) => (
-                <NavigationMenuItem key={item.path}>
-                  <Link to={item.path}>
-                    <NavigationMenuLink
-                      className={cn(
-                        navigationMenuTriggerStyle(),
-                        location.pathname === item.path
-                          ? "text-blue-600 font-medium"
-                          : "text-gray-700"
-                      )}
-                    >
-                      <span className="flex items-center gap-2">
-                        {item.icon && <item.icon size={16} className="text-blue-500" />}
-                        {item.text}
-                      </span>
-                    </NavigationMenuLink>
-                  </Link>
-                </NavigationMenuItem>
-              ))}
-            </NavigationMenuList>
-          </NavigationMenu>
-          
-          <div className="hidden md:inline-block ml-4">
-            <Link to="/login">
-              <Button 
-                variant="outline" 
-                size="sm"
-              >
-                Login
-              </Button>
+        <div className="hidden md:flex items-center space-x-6">
+          {menuItems.map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`font-medium text-sm ${
+                location.pathname === item.path
+                  ? isScrolled ? "text-blue-600" : "text-white font-bold"
+                  : isScrolled ? "text-gray-700 hover:text-blue-600" : "text-white/80 hover:text-white"
+              } transition-colors flex items-center gap-1`}
+            >
+              {item.icon && <item.icon size={16} className={isScrolled ? "text-blue-500" : "text-white"} />}
+              {item.text}
             </Link>
-          </div>
+          ))}
+          
+          <Link to="/login">
+            <Button 
+              variant={isScrolled ? "outline" : "secondary"}
+              size="sm"
+              className={isScrolled ? "border-blue-600 text-blue-600 hover:bg-blue-50" : "bg-white text-blue-600 hover:bg-blue-50"}
+            >
+              Login
+            </Button>
+          </Link>
         </div>
 
         <button
-          className="md:hidden text-gray-700"
+          className={`md:hidden ${isScrolled ? "text-gray-700" : "text-white"}`}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           aria-label={isMenuOpen ? "Tutup menu" : "Buka menu"}
         >
@@ -127,7 +117,7 @@ const Header = () => {
                   <Button 
                     variant="outline" 
                     size="sm" 
-                    className="w-full"
+                    className="w-full border-blue-600 text-blue-600"
                   >
                     Login
                   </Button>
