@@ -1,9 +1,29 @@
 
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Twitter } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Twitter, Globe } from "lucide-react";
+import { Button } from "./ui/button";
+import { 
+  DropdownMenu, 
+  DropdownMenuContent, 
+  DropdownMenuItem, 
+  DropdownMenuTrigger 
+} from "@/components/ui/dropdown-menu";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const [currentLang, setCurrentLang] = useState("id");
+  
+  const languages = [
+    { code: "id", name: "Bahasa Indonesia" },
+    { code: "en", name: "English" }
+  ];
+
+  const handleLanguageChange = (langCode: string) => {
+    setCurrentLang(langCode);
+    // In a real app, this would trigger language changes throughout the app
+    console.log(`Language changed to: ${langCode}`);
+  };
   
   return (
     <footer className="bg-blue-900 text-white">
@@ -75,10 +95,32 @@ const Footer = () => {
           </div>
         </div>
         
-        <div className="border-t border-blue-800 mt-8 pt-8 text-center">
-          <p className="text-blue-200">
+        <div className="border-t border-blue-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-blue-200 mb-4 md:mb-0">
             &copy; {currentYear} TechConsult. Hak Cipta Dilindungi.
           </p>
+          
+          <div className="flex items-center">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="sm" className="text-blue-100 hover:text-white">
+                  <Globe size={16} className="mr-2" />
+                  {currentLang === "id" ? "Bahasa Indonesia" : "English"}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                {languages.map(lang => (
+                  <DropdownMenuItem 
+                    key={lang.code}
+                    onClick={() => handleLanguageChange(lang.code)}
+                    className={currentLang === lang.code ? "bg-blue-50 text-blue-600" : ""}
+                  >
+                    {lang.name}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
       </div>
     </footer>

@@ -1,10 +1,11 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle, Code, Laptop, MessageSquare, Phone, Users } from "lucide-react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { toast } from "@/hooks/use-toast";
+import Testimonial from "@/components/Testimonial";
+import Newsletter from "@/components/Newsletter";
 
 const services = [
   {
@@ -66,6 +67,27 @@ const recentProjects = [
     client: "PT Sukses Makmur",
     image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
     link: "/portofolio/company-profile"
+  }
+];
+
+const testimonials = [
+  {
+    name: "Ahmad Sulaiman",
+    company: "PT Maju Bersama",
+    text: "TechConsult membantu perusahaan kami dalam merancang website e-commerce yang user-friendly dan responsif. Tim profesional mereka sangat memahami kebutuhan kami.",
+    rating: 5,
+  },
+  {
+    name: "Siti Rahayu",
+    company: "CV Teknologi Andalan",
+    text: "Kami sangat puas dengan aplikasi manajemen inventori yang dikembangkan oleh TechConsult. Fitur-fiturnya lengkap dan sangat membantu operasional kami.",
+    rating: 4,
+  },
+  {
+    name: "Budi Santoso",
+    company: "PT Sukses Makmur",
+    text: "Konsultasi IT yang diberikan TechConsult memberikan solusi tepat untuk transformasi digital bisnis kami. Mereka tidak hanya memberikan saran tetapi juga implementasi yang solid.",
+    rating: 5,
   }
 ];
 
@@ -179,6 +201,29 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Testimonials Section */}
+      <section className="py-16 bg-blue-50">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Apa Kata Klien Kami</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Kepuasan klien adalah prioritas utama kami
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <Testimonial
+                key={index}
+                name={testimonial.name}
+                company={testimonial.company}
+                text={testimonial.text}
+                rating={testimonial.rating}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Recent Projects */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4 md:px-6">
@@ -235,27 +280,7 @@ const Index = () => {
       </section>
 
       {/* Subscribe Section */}
-      <section className="py-12 bg-gray-100">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-3xl mx-auto text-center">
-            <h3 className="text-2xl font-bold mb-4">Dapatkan Update Terbaru</h3>
-            <p className="text-gray-600 mb-6">
-              Berlangganan newsletter kami untuk mendapatkan informasi terbaru tentang teknologi dan promo.
-            </p>
-            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Alamat email Anda"
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <Button type="submit">Berlangganan</Button>
-            </form>
-          </div>
-        </div>
-      </section>
+      <Newsletter />
     </div>
   );
 };
