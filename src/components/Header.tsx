@@ -13,7 +13,6 @@ import {
   navigationMenuTriggerStyle
 } from "./ui/navigation-menu";
 import { cn } from "@/lib/utils";
-import SearchBar from "./SearchBar";
 
 const menuItems = [
   { text: "Beranda", path: "/" },
@@ -74,10 +73,6 @@ const Header = () => {
             </Link>
           ))}
           
-          <div className="hidden lg:block">
-            <SearchBar />
-          </div>
-          
           <Link to="/login">
             <Button 
               variant={isScrolled ? "outline" : "secondary"}
@@ -101,9 +96,6 @@ const Header = () => {
       {isMenuOpen && (
         <div className="md:hidden bg-white shadow-lg">
           <nav className="container mx-auto px-4 py-4">
-            <div className="mb-4">
-              <SearchBar />
-            </div>
             <ul className="space-y-4">
               {menuItems.map((item) => (
                 <li key={item.path}>
