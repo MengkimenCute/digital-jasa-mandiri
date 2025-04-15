@@ -4,8 +4,6 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Briefcase } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Button } from "./ui/button";
-import { ThemeToggle } from "./ThemeToggle";
-import { GlobalSearch } from "./GlobalSearch";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -75,21 +73,17 @@ const Header = () => {
             </Link>
           ))}
           
-          <div className="flex items-center gap-2">
-            <GlobalSearch />
-            <ThemeToggle />
-            <Link to="/login">
-              <Button 
-                variant={isScrolled ? "outline" : "secondary"}
-                size="sm"
-                className={isScrolled 
-                  ? "border-primary text-primary hover:bg-primary/10 dark:border-white dark:text-white" 
-                  : "bg-white text-blue-600 hover:bg-blue-50 dark:bg-gray-800 dark:text-white"}
-              >
-                {t('common.login')}
-              </Button>
-            </Link>
-          </div>
+          <Link to="/login">
+            <Button 
+              variant={isScrolled ? "outline" : "secondary"}
+              size="sm"
+              className={isScrolled 
+                ? "border-primary text-primary hover:bg-primary/10 dark:border-white dark:text-white" 
+                : "bg-white text-blue-600 hover:bg-blue-50 dark:bg-gray-800 dark:text-white"}
+            >
+              {t('common.login')}
+            </Button>
+          </Link>
         </div>
 
         <button
@@ -101,7 +95,6 @@ const Header = () => {
         </button>
       </div>
 
-      {/* Mobile menu with dark mode support */}
       {isMenuOpen && (
         <div className="md:hidden bg-background dark:bg-gray-900 shadow-lg">
           <nav className="container mx-auto px-4 py-4">
