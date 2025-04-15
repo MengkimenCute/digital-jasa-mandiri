@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Briefcase, Check, Users, MessageSquare, Award, Linkedin, Github, Twitter } from "lucide-react";
@@ -106,8 +106,12 @@ const TentangKami = () => {
                 Kami percaya bahwa teknologi yang tepat dapat memberdayakan bisnis untuk mencapai potensi penuh mereka. Itulah mengapa kami selalu berupaya untuk menghadirkan solusi yang tidak hanya inovatif, tetapi juga praktis dan efektif.
               </p>
               <div className="flex flex-wrap gap-4 mt-8">
-                <Button>Pelajari Layanan Kami</Button>
-                <Button variant="outline">Lihat Portofolio</Button>
+                <Link to="/layanan">
+                  <Button>Pelajari Layanan Kami</Button>
+                </Link>
+                <Link to="/portofolio">
+                  <Button variant="outline">Lihat Portofolio</Button>
+                </Link>
               </div>
             </div>
             <div className="relative">
