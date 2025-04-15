@@ -1,27 +1,14 @@
-
 {
   "common": {
-    "login": "Masuk",
-    "logout": "Keluar",
-    "home": "Beranda",
-    "services": "Layanan",
-    "portfolio": "Portofolio",
-    "about": "Tentang Kami",
-    "careers": "Karir",
-    "contact": "Kontak",
     "search": "Cari",
-    "close": "Tutup",
-    "submit": "Kirim",
-    "loading": "Memuat...",
-    "website": "Pengembangan Website",
-    "app": "Pengembangan Aplikasi",
-    "consultation": "Konsultasi IT",
-    "seo": "Optimasi SEO",
-    "uiux": "Desain UI/UX",
-    "learnMore": "Pelajari Lebih Lanjut",
-    "contactUs": "Hubungi Kami",
-    "viewPortfolio": "Lihat Portofolio",
-    "readMore": "Baca Selengkapnya"
+    "searchPlaceholder": "Cari halaman...",
+    "noResults": "Tidak ada hasil.",
+    "pages": "Halaman",
+    "login": "Masuk",
+    "darkMode": "Mode gelap",
+    "lightMode": "Mode terang",
+    "skipToContent": "Langsung ke konten utama",
+    "loading": "Memuat..."
   },
   "header": {
     "menu": {
