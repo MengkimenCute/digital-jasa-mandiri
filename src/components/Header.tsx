@@ -1,7 +1,7 @@
-
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Briefcase } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { Button } from "./ui/button";
 import { 
   NavigationMenu,
@@ -14,19 +14,20 @@ import {
 } from "./ui/navigation-menu";
 import { cn } from "@/lib/utils";
 
-const menuItems = [
-  { text: "Beranda", path: "/" },
-  { text: "Layanan", path: "/layanan" },
-  { text: "Portofolio", path: "/portofolio" },
-  { text: "Tentang Kami", path: "/tentang-kami" },
-  { text: "Karir", path: "/karir", icon: Briefcase },
-  { text: "Kontak", path: "/kontak" },
-];
-
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const { t } = useTranslation();
+
+  const menuItems = [
+    { text: t('common.home'), path: "/" },
+    { text: t('common.services'), path: "/layanan" },
+    { text: t('common.portfolio'), path: "/portofolio" },
+    { text: t('common.about'), path: "/tentang-kami" },
+    { text: t('common.careers'), path: "/karir", icon: Briefcase },
+    { text: t('common.contact'), path: "/kontak" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -79,7 +80,7 @@ const Header = () => {
               size="sm"
               className={isScrolled ? "border-blue-600 text-blue-600 hover:bg-blue-50" : "bg-white text-blue-600 hover:bg-blue-50"}
             >
-              Login
+              {t('common.login')}
             </Button>
           </Link>
         </div>
@@ -87,7 +88,7 @@ const Header = () => {
         <button
           className={`md:hidden ${isScrolled ? "text-gray-700" : "text-white"}`}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          aria-label={isMenuOpen ? "Tutup menu" : "Buka menu"}
+          aria-label={isMenuOpen ? t('header.menu.close') : t('header.menu.open')}
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -119,7 +120,7 @@ const Header = () => {
                     size="sm" 
                     className="w-full border-blue-600 text-blue-600"
                   >
-                    Login
+                    {t('common.login')}
                   </Button>
                 </Link>
               </li>

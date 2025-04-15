@@ -1,0 +1,34 @@
+
+{
+  "common": {
+    "login": "Masuk",
+    "logout": "Keluar",
+    "home": "Beranda",
+    "services": "Layanan",
+    "portfolio": "Portofolio",
+    "about": "Tentang Kami",
+    "careers": "Karir",
+    "contact": "Kontak",
+    "search": "Cari",
+    "close": "Tutup",
+    "submit": "Kirim",
+    "loading": "Memuat..."
+  },
+  "header": {
+    "menu": {
+      "open": "Buka menu",
+      "close": "Tutup menu"
+    }
+  },
+  "footer": {
+    "company_description": "Solusi digital terpercaya untuk bisnis Anda. Kami membantu perusahaan bertransformasi melalui teknologi.",
+    "quick_links": "Halaman",
+    "services": "Layanan",
+    "contact": "Kontak",
+    "copyright": "© {{year}} TechConsult. Hak Cipta Dilindungi.",
+    "language": {
+      "id": "Bahasa Indonesia",
+      "en": "English"
+    }
+  }
+}

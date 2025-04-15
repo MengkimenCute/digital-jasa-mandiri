@@ -1,0 +1,34 @@
+
+{
+  "common": {
+    "login": "Login",
+    "logout": "Logout",
+    "home": "Home",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "about": "About Us",
+    "careers": "Careers",
+    "contact": "Contact",
+    "search": "Search",
+    "close": "Close",
+    "submit": "Submit",
+    "loading": "Loading..."
+  },
+  "header": {
+    "menu": {
+      "open": "Open menu",
+      "close": "Close menu"
+    }
+  },
+  "footer": {
+    "company_description": "Trusted digital solutions for your business. We help companies transform through technology.",
+    "quick_links": "Pages",
+    "services": "Services",
+    "contact": "Contact",
+    "copyright": "© {{year}} TechConsult. All Rights Reserved.",
+    "language": {
+      "id": "Bahasa Indonesia",
+      "en": "English"
+    }
+  }
+}

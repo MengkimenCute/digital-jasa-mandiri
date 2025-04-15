@@ -1,6 +1,6 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Twitter, Globe } from "lucide-react";
 import { Button } from "./ui/button";
 import { 
@@ -11,18 +11,16 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 const Footer = () => {
+  const { t, i18n } = useTranslation();
   const currentYear = new Date().getFullYear();
-  const [currentLang, setCurrentLang] = useState("id");
   
   const languages = [
-    { code: "id", name: "Bahasa Indonesia" },
-    { code: "en", name: "English" }
+    { code: "id", name: t('footer.language.id') },
+    { code: "en", name: t('footer.language.en') }
   ];
 
   const handleLanguageChange = (langCode: string) => {
-    setCurrentLang(langCode);
-    // In a real app, this would trigger language changes throughout the app
-    console.log(`Language changed to: ${langCode}`);
+    i18n.changeLanguage(langCode);
   };
   
   return (
@@ -33,7 +31,7 @@ const Footer = () => {
           <div className="md:col-span-1">
             <h3 className="text-xl font-bold mb-4">TechConsult</h3>
             <p className="text-blue-100 mb-4">
-              Solusi digital terpercaya untuk bisnis Anda. Kami membantu perusahaan bertransformasi melalui teknologi.
+              {t('footer.company_description')}
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-blue-100 hover:text-white transition-colors">
@@ -53,31 +51,31 @@ const Footer = () => {
           
           {/* Quick Links */}
           <div className="md:col-span-1">
-            <h3 className="text-lg font-semibold mb-4">Halaman</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('footer.quick_links')}</h3>
             <ul className="space-y-2">
-              <li><Link to="/" className="text-blue-100 hover:text-white transition-colors">Beranda</Link></li>
-              <li><Link to="/layanan" className="text-blue-100 hover:text-white transition-colors">Layanan</Link></li>
-              <li><Link to="/portofolio" className="text-blue-100 hover:text-white transition-colors">Portofolio</Link></li>
-              <li><Link to="/tentang-kami" className="text-blue-100 hover:text-white transition-colors">Tentang Kami</Link></li>
-              <li><Link to="/kontak" className="text-blue-100 hover:text-white transition-colors">Kontak</Link></li>
+              <li><Link to="/" className="text-blue-100 hover:text-white transition-colors">{t('common.home')}</Link></li>
+              <li><Link to="/layanan" className="text-blue-100 hover:text-white transition-colors">{t('common.services')}</Link></li>
+              <li><Link to="/portofolio" className="text-blue-100 hover:text-white transition-colors">{t('common.portfolio')}</Link></li>
+              <li><Link to="/tentang-kami" className="text-blue-100 hover:text-white transition-colors">{t('common.about')}</Link></li>
+              <li><Link to="/kontak" className="text-blue-100 hover:text-white transition-colors">{t('common.contact')}</Link></li>
             </ul>
           </div>
           
           {/* Services */}
           <div className="md:col-span-1">
-            <h3 className="text-lg font-semibold mb-4">Layanan</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('footer.services')}</h3>
             <ul className="space-y-2">
-              <li><Link to="/layanan/website" className="text-blue-100 hover:text-white transition-colors">Pembuatan Website</Link></li>
-              <li><Link to="/layanan/aplikasi" className="text-blue-100 hover:text-white transition-colors">Pengembangan Aplikasi</Link></li>
-              <li><Link to="/layanan/konsultasi" className="text-blue-100 hover:text-white transition-colors">Konsultasi IT</Link></li>
-              <li><Link to="/layanan/seo" className="text-blue-100 hover:text-white transition-colors">Optimasi SEO</Link></li>
-              <li><Link to="/layanan/ui-ux" className="text-blue-100 hover:text-white transition-colors">Desain UI/UX</Link></li>
+              <li><Link to="/layanan/website" className="text-blue-100 hover:text-white transition-colors">{t('common.website')}</Link></li>
+              <li><Link to="/layanan/aplikasi" className="text-blue-100 hover:text-white transition-colors">{t('common.app')}</Link></li>
+              <li><Link to="/layanan/konsultasi" className="text-blue-100 hover:text-white transition-colors">{t('common.consultation')}</Link></li>
+              <li><Link to="/layanan/seo" className="text-blue-100 hover:text-white transition-colors">{t('common.seo')}</Link></li>
+              <li><Link to="/layanan/ui-ux" className="text-blue-100 hover:text-white transition-colors">{t('common.uiux')}</Link></li>
             </ul>
           </div>
           
           {/* Contact Info */}
           <div className="md:col-span-1">
-            <h3 className="text-lg font-semibold mb-4">Kontak</h3>
+            <h3 className="text-lg font-semibold mb-4">{t('footer.contact')}</h3>
             <ul className="space-y-4">
               <li className="flex items-start">
                 <MapPin size={20} className="mr-2 mt-1 flex-shrink-0" />
@@ -97,7 +95,7 @@ const Footer = () => {
         
         <div className="border-t border-blue-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-blue-200 mb-4 md:mb-0">
-            &copy; {currentYear} TechConsult. Hak Cipta Dilindungi.
+            {t('footer.copyright', { year: currentYear })}
           </p>
           
           <div className="flex items-center">
@@ -105,7 +103,7 @@ const Footer = () => {
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" size="sm" className="text-blue-100 hover:text-white">
                   <Globe size={16} className="mr-2" />
-                  {currentLang === "id" ? "Bahasa Indonesia" : "English"}
+                  {languages.find(lang => lang.code === i18n.language)?.name || languages[0].name}
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
@@ -113,7 +111,7 @@ const Footer = () => {
                   <DropdownMenuItem 
                     key={lang.code}
                     onClick={() => handleLanguageChange(lang.code)}
-                    className={currentLang === lang.code ? "bg-blue-50 text-blue-600" : ""}
+                    className={i18n.language === lang.code ? "bg-blue-50 text-blue-600" : ""}
                   >
                     {lang.name}
                   </DropdownMenuItem>
