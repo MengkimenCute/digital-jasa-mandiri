@@ -1,5 +1,6 @@
 
 import { ReactNode, useState } from "react";
+import { useTranslation } from "react-i18next";
 import Header from "./Header";
 import Footer from "./Footer";
 import Promotion from "./Promotion";
@@ -9,15 +10,16 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  const { t } = useTranslation();
   const [showPromotion, setShowPromotion] = useState(true);
   
-  // Data contoh untuk promo
+  // Sample promotion data
   const currentPromotion = {
-    title: "Promo Spesial Website",
-    description: "Dapatkan diskon untuk pembuatan website company profile",
+    title: "Special Website Promo",
+    description: "Get a discount on company profile website development",
     discount: "25% OFF",
     code: "WEBSITE25",
-    expiryDate: "2025-05-30", // Tanggal akhir promo
+    expiryDate: "2025-05-30", // Promo end date
   };
 
   return (

@@ -12,7 +12,16 @@
     "search": "Cari",
     "close": "Tutup",
     "submit": "Kirim",
-    "loading": "Memuat..."
+    "loading": "Memuat...",
+    "website": "Pengembangan Website",
+    "app": "Pengembangan Aplikasi",
+    "consultation": "Konsultasi IT",
+    "seo": "Optimasi SEO",
+    "uiux": "Desain UI/UX",
+    "learnMore": "Pelajari Lebih Lanjut",
+    "contactUs": "Hubungi Kami",
+    "viewPortfolio": "Lihat Portofolio",
+    "readMore": "Baca Selengkapnya"
   },
   "header": {
     "menu": {
@@ -30,5 +39,50 @@
       "id": "Bahasa Indonesia",
       "en": "English"
     }
+  },
+  "pages": {
+    "services": {
+      "title": "Layanan Kami",
+      "description": "Solusi digital komprehensif untuk memenuhi kebutuhan bisnis Anda",
+      "process": {
+        "title": "Bagaimana Kami Bekerja",
+        "description": "Proses pengembangan kami berfokus pada kebutuhan bisnis Anda",
+        "steps": {
+          "consultation": {
+            "title": "Konsultasi",
+            "description": "Kami memahami kebutuhan dan tujuan bisnis Anda untuk merancang solusi yang tepat"
+          },
+          "development": {
+            "title": "Pengembangan",
+            "description": "Tim ahli kami bekerja mengembangkan solusi yang sesuai dengan kebutuhan Anda"
+          },
+          "implementation": {
+            "title": "Implementasi",
+            "description": "Kami melakukan deployment dan memastikan semua berjalan dengan baik"
+          }
+        }
+      },
+      "faq": {
+        "title": "Pertanyaan yang Sering Diajukan",
+        "description": "Jawaban untuk pertanyaan umum tentang layanan kami"
+      },
+      "cta": {
+        "title": "Siap Memulai Proyek Anda?",
+        "description": "Hubungi kami untuk konsultasi gratis dan diskusikan kebutuhan bisnis Anda",
+        "button": "Hubungi Kami Sekarang"
+      }
+    },
+    "notFound": {
+      "title": "Halaman Tidak Ditemukan",
+      "description": "Maaf, halaman yang Anda cari tidak ditemukan atau telah dipindahkan.",
+      "backButton": "Kembali",
+      "homeButton": "Beranda"
+    }
+  },
+  "newsletter": {
+    "title": "Dapatkan Update Terbaru",
+    "description": "Berlangganan newsletter kami untuk mendapatkan informasi terbaru tentang teknologi dan promo.",
+    "button": "Berlangganan",
+    "success": "Terima kasih telah berlangganan newsletter kami!"
   }
 }

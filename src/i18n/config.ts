@@ -18,7 +18,7 @@ i18n
         translation: idTranslation
       }
     },
-    fallbackLng: 'id',
+    fallbackLng: 'en',
     detection: {
       order: ['localStorage', 'navigator'],
       caches: ['localStorage']
