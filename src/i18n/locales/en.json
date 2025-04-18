@@ -1,3 +1,4 @@
+
 {
   "common": {
     "search": "Search",
@@ -17,7 +18,13 @@
     "learnMore": "Learn More",
     "contactUs": "Contact Us",
     "viewPortfolio": "View Portfolio",
-    "readMore": "Read More"
+    "readMore": "Read More",
+    "home": "Home",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "about": "About Us",
+    "careers": "Careers",
+    "contact": "Contact"
   },
   "header": {
     "menu": {

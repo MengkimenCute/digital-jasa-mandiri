@@ -1,3 +1,4 @@
+
 {
   "common": {
     "search": "Cari",
@@ -8,7 +9,22 @@
     "darkMode": "Mode gelap",
     "lightMode": "Mode terang",
     "skipToContent": "Langsung ke konten utama",
-    "loading": "Memuat..."
+    "loading": "Memuat...",
+    "home": "Beranda",
+    "services": "Layanan",
+    "portfolio": "Portofolio",
+    "about": "Tentang Kami",
+    "careers": "Karir",
+    "contact": "Kontak",
+    "website": "Pengembangan Website",
+    "app": "Pengembangan Aplikasi",
+    "consultation": "Konsultasi IT",
+    "seo": "Optimasi SEO",
+    "uiux": "Desain UI/UX",
+    "learnMore": "Pelajari Lebih Lanjut",
+    "contactUs": "Hubungi Kami",
+    "viewPortfolio": "Lihat Portofolio",
+    "readMore": "Baca Selengkapnya"
   },
   "header": {
     "menu": {
