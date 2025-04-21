@@ -1,10 +1,10 @@
-
 import { useTranslation } from "react-i18next";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Code, Laptop, MessageSquare, BarChart, Brush } from "lucide-react";
 import { Link } from "react-router-dom";
 import FAQ from "@/components/FAQ";
+import ProjectCalculator from "@/components/ProjectCalculator";
 
 const Layanan = () => {
   const { t } = useTranslation();
@@ -206,6 +206,23 @@ const Layanan = () => {
             </Button>
           </Link>
         </div>
+        
+        {/* Project Calculator Section */}
+        <section id="kalkulator" className="pt-24 pb-16">
+          <div className="container mx-auto px-4 md:px-6">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">Kalkulator Estimasi Proyek</h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                Dapatkan estimasi biaya berdasarkan kebutuhan fitur website Anda.
+              </p>
+            </div>
+            <div className="flex justify-center">
+              <div className="w-full max-w-lg">
+                <ProjectCalculator />
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );

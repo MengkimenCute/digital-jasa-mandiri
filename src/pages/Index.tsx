@@ -202,16 +202,20 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Project Cost Calculator Section */}
+      {/* CTA link to Project Calculator in Layanan page */}
       <section className="py-16 bg-gray-100">
         <div className="container mx-auto px-4 md:px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Kalkulator Estimasi Proyek</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Dapatkan estimasi biaya pengembangan website sesuai kebutuhan Anda.
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Butuh Estimasi Biaya Proyek?</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-6">
+              Gunakan kalkulator estimasi untuk mengetahui perkiraan biaya proyek pengembangan website.
             </p>
+            <Link to="/layanan#kalkulator">
+              <Button size="lg" className="bg-blue-600 text-white hover:bg-blue-700">
+                Kalkulator Estimasi Proyek
+              </Button>
+            </Link>
           </div>
-          <ProjectCalculator />
         </div>
       </section>
 
