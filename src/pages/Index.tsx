@@ -6,6 +6,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { toast } from "@/hooks/use-toast";
 import Testimonial from "@/components/Testimonial";
 import Newsletter from "@/components/Newsletter";
+import ProjectCalculator from "@/components/ProjectCalculator";
 
 const services = [
   {
@@ -198,6 +199,19 @@ const Index = () => {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Project Cost Calculator Section */}
+      <section className="py-16 bg-gray-100">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Kalkulator Estimasi Proyek</h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Dapatkan estimasi biaya pengembangan website sesuai kebutuhan Anda.
+            </p>
+          </div>
+          <ProjectCalculator />
         </div>
       </section>
 
