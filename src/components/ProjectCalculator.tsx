@@ -19,12 +19,8 @@ import { useState } from 'react';
 
 const formSchema = z.object({
   websiteType: z.string().min(1, 'Please select a website type'),
-  pages: z.string().transform(Number).pipe(
-    z.number().min(1, 'Minimum 1 page').max(100, 'Maximum 100 pages')
-  ),
-  features: z.string().transform(Number).pipe(
-    z.number().min(0, 'Cannot be negative').max(20, 'Maximum 20 features')
-  ),
+  pages: z.coerce.number().min(1, 'Minimum 1 page').max(100, 'Maximum 100 pages'),
+  features: z.coerce.number().min(0, 'Cannot be negative').max(20, 'Maximum 20 features'),
 });
 
 const basePrice = {
@@ -42,8 +38,8 @@ const ProjectCalculator = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       websiteType: '',
-      pages: '',
-      features: '',
+      pages: 1,
+      features: 0,
     },
   });
 
@@ -102,7 +98,12 @@ const ProjectCalculator = () => {
               <FormItem>
                 <FormLabel>Number of Pages</FormLabel>
                 <FormControl>
-                  <Input type="number" placeholder="e.g., 5" {...field} />
+                  <Input 
+                    type="number" 
+                    placeholder="e.g., 5" 
+                    {...field}
+                    onChange={(e) => field.onChange(e.target.valueAsNumber || 1)}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -116,7 +117,12 @@ const ProjectCalculator = () => {
               <FormItem>
                 <FormLabel>Custom Features</FormLabel>
                 <FormControl>
-                  <Input type="number" placeholder="e.g., 3" {...field} />
+                  <Input 
+                    type="number" 
+                    placeholder="e.g., 3" 
+                    {...field}
+                    onChange={(e) => field.onChange(e.target.valueAsNumber || 0)}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
