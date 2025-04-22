@@ -18,14 +18,7 @@ import JadwalKonsultasi from "./pages/JadwalKonsultasi";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import LupaPassword from "./pages/LupaPassword";
-
-// Admin Pages
-import Dashboard from "./pages/admin/Dashboard";
-import AdminLayanan from "./pages/admin/AdminLayanan";
-import AdminPengguna from "./pages/admin/AdminPengguna";
-import AdminBlog from "./pages/admin/AdminBlog";
-import AdminKarir from "./pages/admin/AdminKarir";
-import AdminPengaturan from "./pages/admin/AdminPengaturan";
+import Register from "./pages/Register";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +41,7 @@ const App = () => (
           <Route path="/jadwal-konsultasi" element={<Layout><JadwalKonsultasi /></Layout>} />
           <Route path="/login" element={<Login />} />
           <Route path="/lupa-password" element={<LupaPassword />} />
+          <Route path="/register" element={<Register />} />
           
           {/* Admin Routes */}
           <Route path="/admin" element={<DashboardLayout><Dashboard /></DashboardLayout>} />
