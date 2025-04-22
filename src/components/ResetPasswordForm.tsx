@@ -9,7 +9,18 @@ import { createClient } from "@supabase/supabase-js";
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+let supabase = null;
+try {
+  if (supabaseUrl && supabaseAnonKey && supabaseUrl.startsWith('http')) {
+    new URL(supabaseUrl);
+    supabase = createClient(supabaseUrl, supabaseAnonKey);
+  } else {
+    console.warn("URL Supabase tidak valid atau kunci tidak tersedia:", { supabaseUrl, hasKey: !!supabaseAnonKey });
+  }
+} catch (error) {
+  console.error("Error saat membuat Supabase client:", error);
+}
 
 const ResetPasswordForm = () => {
   const [email, setEmail] = useState("");
@@ -20,22 +31,46 @@ const ResetPasswordForm = () => {
     setLoading(true);
 
     try {
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/reset-password-confirmation`,
-      });
-
-      if (error) {
+      if (!supabase) {
         toast({
-          title: "Gagal Mengirim Reset Password",
-          description: error.message,
+          title: "Konfigurasi Error",
+          description: "Konfigurasi Supabase tidak lengkap. Silakan pastikan API key Supabase sudah diatur dengan benar.",
           variant: "destructive",
         });
+        
+        // Demo mode
+        if (email) {
+          toast({
+            title: "Demo Mode",
+            description: "Email reset password simulasi telah dikirim ke " + email,
+          });
+        }
       } else {
-        toast({
-          title: "Email Terkirim",
-          description: "Silakan cek email Anda untuk instruksi reset password.",
+        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+          redirectTo: `${window.location.origin}/reset-password-confirmation`,
         });
-        setEmail("");
+
+        if (error) {
+          if (error.message.includes("Failed to fetch") || error.message === "NetworkError") {
+            toast({
+              title: "Koneksi Error",
+              description: "Gagal terhubung ke layanan autentikasi. Periksa koneksi internet Anda atau coba lagi nanti.",
+              variant: "destructive",
+            });
+          } else {
+            toast({
+              title: "Gagal Mengirim Reset Password",
+              description: error.message,
+              variant: "destructive",
+            });
+          }
+        } else {
+          toast({
+            title: "Email Terkirim",
+            description: "Silakan cek email Anda untuk instruksi reset password.",
+          });
+          setEmail("");
+        }
       }
     } catch (error) {
       toast({

@@ -10,7 +10,18 @@ import { createClient } from "@supabase/supabase-js";
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+let supabase = null;
+try {
+  if (supabaseUrl && supabaseAnonKey && supabaseUrl.startsWith('http')) {
+    new URL(supabaseUrl);
+    supabase = createClient(supabaseUrl, supabaseAnonKey);
+  } else {
+    console.warn("URL Supabase tidak valid atau kunci tidak tersedia:", { supabaseUrl, hasKey: !!supabaseAnonKey });
+  }
+} catch (error) {
+  console.error("Error saat membuat Supabase client:", error);
+}
 
 const RegisterForm = () => {
   const navigate = useNavigate();
@@ -27,29 +38,52 @@ const RegisterForm = () => {
     setLoading(true);
 
     try {
-      const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
-        email: formData.email,
-        password: formData.password,
-        options: {
-          data: {
-            name: formData.name,
-            role: 'user', // Default role for new users
-          }
-        }
-      });
-
-      if (signUpError) {
+      if (!supabase) {
         toast({
-          title: "Registrasi Gagal",
-          description: signUpError.message,
+          title: "Konfigurasi Error",
+          description: "Konfigurasi Supabase tidak lengkap. Silakan pastikan API key Supabase sudah diatur dengan benar.",
           variant: "destructive",
         });
-      } else {
+        
+        // Demo mode - simulate registration
         toast({
-          title: "Registrasi Berhasil",
-          description: "Silakan cek email Anda untuk verifikasi.",
+          title: "Demo Mode",
+          description: "Registrasi simulasi berhasil. Silakan login dengan akun demo.",
         });
-        navigate("/login");
+        setTimeout(() => navigate("/login"), 2000);
+      } else {
+        const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+          email: formData.email,
+          password: formData.password,
+          options: {
+            data: {
+              name: formData.name,
+              role: 'user', // Default role for new users
+            }
+          }
+        });
+
+        if (signUpError) {
+          if (signUpError.message.includes("Failed to fetch") || signUpError.message === "NetworkError") {
+            toast({
+              title: "Koneksi Error",
+              description: "Gagal terhubung ke layanan autentikasi. Periksa koneksi internet Anda atau coba lagi nanti.",
+              variant: "destructive",
+            });
+          } else {
+            toast({
+              title: "Registrasi Gagal",
+              description: signUpError.message,
+              variant: "destructive",
+            });
+          }
+        } else {
+          toast({
+            title: "Registrasi Berhasil",
+            description: "Silakan cek email Anda untuk verifikasi.",
+          });
+          navigate("/login");
+        }
       }
     } catch (error) {
       toast({

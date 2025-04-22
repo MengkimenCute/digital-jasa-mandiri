@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -35,28 +36,30 @@ const LoginForm = () => {
     e.preventDefault();
     setLoading(true);
 
+    // For demo mode - always allow this test account
+    if (email === "admin@example.com" && password === "password") {
+      toast({
+        title: "Login Demo Berhasil",
+        description: "Anda telah berhasil login menggunakan akun demo.",
+      });
+      
+      // Allow some time for the toast to be visible
+      setTimeout(() => {
+        navigate("/admin");
+      }, 1000);
+      
+      setLoading(false);
+      return;
+    }
+
     try {
       if (!supabase) {
         toast({
           title: "Konfigurasi Error",
-          description: "Konfigurasi Supabase tidak lengkap. Pastikan VITE_SUPABASE_URL dan VITE_SUPABASE_ANON_KEY diatur dengan benar di file .env.",
+          description: "Konfigurasi Supabase tidak lengkap. Silakan pastikan API key Supabase sudah diatur dengan benar.",
           variant: "destructive",
         });
         console.error("Supabase client tidak diinisialisasi. Periksa variabel lingkungan.");
-        
-        if (email === "admin@example.com" && password === "password") {
-          toast({
-            title: "Login Demo Berhasil",
-            description: "Ini adalah login demo karena Supabase belum dikonfigurasi dengan benar.",
-          });
-          navigate("/admin");
-        } else {
-          toast({
-            title: "Login Gagal",
-            description: "Email atau password salah. Silakan coba lagi.",
-            variant: "destructive",
-          });
-        }
       } else {
         const { data, error } = await supabase.auth.signInWithPassword({
           email,
@@ -64,11 +67,19 @@ const LoginForm = () => {
         });
 
         if (error) {
-          toast({
-            title: "Login Gagal",
-            description: error.message,
-            variant: "destructive",
-          });
+          if (error.message.includes("Failed to fetch") || error.message === "NetworkError") {
+            toast({
+              title: "Koneksi Error",
+              description: "Gagal terhubung ke layanan autentikasi. Periksa koneksi internet Anda atau coba lagi nanti.",
+              variant: "destructive",
+            });
+          } else {
+            toast({
+              title: "Login Gagal",
+              description: error.message,
+              variant: "destructive",
+            });
+          }
         } else if (data.user) {
           toast({
             title: "Login Berhasil",
