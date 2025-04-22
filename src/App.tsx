@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -19,6 +20,14 @@ import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
 import LupaPassword from "./pages/LupaPassword";
 import Register from "./pages/Register";
+
+// Admin Page Imports
+import Dashboard from "./pages/admin/Dashboard";
+import AdminLayanan from "./pages/admin/AdminLayanan";
+import AdminPengguna from "./pages/admin/AdminPengguna";
+import AdminBlog from "./pages/admin/AdminBlog";
+import AdminKarir from "./pages/admin/AdminKarir";
+import AdminPengaturan from "./pages/admin/AdminPengaturan";
 
 const queryClient = new QueryClient();
 
