@@ -12,10 +12,20 @@ import { createClient } from "@supabase/supabase-js";
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-// Buat client Supabase hanya jika kedua nilai tersedia
-const supabase = supabaseUrl && supabaseAnonKey 
-  ? createClient(supabaseUrl, supabaseAnonKey)
-  : null;
+// Coba buat client Supabase hanya jika kedua nilai tersedia dan URL valid
+let supabase = null;
+try {
+  if (supabaseUrl && supabaseAnonKey && supabaseUrl.startsWith('http')) {
+    // Memastikan URL valid dengan mencoba membuat objek URL
+    new URL(supabaseUrl);
+    supabase = createClient(supabaseUrl, supabaseAnonKey);
+    console.log("Supabase client berhasil dibuat");
+  } else {
+    console.warn("URL Supabase tidak valid atau kunci tidak tersedia:", { supabaseUrl, hasKey: !!supabaseAnonKey });
+  }
+} catch (error) {
+  console.error("Error saat membuat Supabase client:", error);
+}
 
 const LoginForm = () => {
   const navigate = useNavigate();

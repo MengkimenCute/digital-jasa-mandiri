@@ -5,6 +5,10 @@ import path from 'path';
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
+  
+  // Verifikasi URL Supabase untuk debugging
+  console.log("Supabase URL:", env.VITE_SUPABASE_URL);
+  
   return {
     server: {
       host: "::",
