@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -7,16 +6,14 @@ import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 import { Eye, EyeOff, LogIn, Mail, Lock } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
+import { Link } from "react-router-dom";
 
-// Periksa apakah variabel lingkungan tersedia
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-// Coba buat client Supabase hanya jika kedua nilai tersedia dan URL valid
 let supabase = null;
 try {
   if (supabaseUrl && supabaseAnonKey && supabaseUrl.startsWith('http')) {
-    // Memastikan URL valid dengan mencoba membuat objek URL
     new URL(supabaseUrl);
     supabase = createClient(supabaseUrl, supabaseAnonKey);
     console.log("Supabase client berhasil dibuat");
@@ -39,9 +36,7 @@ const LoginForm = () => {
     setLoading(true);
 
     try {
-      // Cek apakah supabase client sudah dibuat
       if (!supabase) {
-        // Jika tidak, tampilkan pesan error tentang konfigurasi
         toast({
           title: "Konfigurasi Error",
           description: "Konfigurasi Supabase tidak lengkap. Pastikan VITE_SUPABASE_URL dan VITE_SUPABASE_ANON_KEY diatur dengan benar di file .env.",
@@ -49,7 +44,6 @@ const LoginForm = () => {
         });
         console.error("Supabase client tidak diinisialisasi. Periksa variabel lingkungan.");
         
-        // Untuk contoh demo, izinkan login dengan kredensial demo
         if (email === "admin@example.com" && password === "password") {
           toast({
             title: "Login Demo Berhasil",
@@ -64,7 +58,6 @@ const LoginForm = () => {
           });
         }
       } else {
-        // Jika supabase tersedia, gunakan autentikasi Supabase
         const { data, error } = await supabase.auth.signInWithPassword({
           email,
           password,
@@ -118,19 +111,12 @@ const LoginForm = () => {
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <Label htmlFor="password" className="text-gray-700">Password</Label>
-          <button
-            type="button"
+          <Link
+            to="/lupa-password"
             className="text-sm text-blue-600 hover:text-blue-800 hover:underline"
-            onClick={(e) => {
-              e.preventDefault();
-              toast({
-                title: "Reset Password",
-                description: "Fitur reset password akan tersedia setelah backend diimplementasikan.",
-              });
-            }}
           >
             Lupa password?
-          </button>
+          </Link>
         </div>
         
         <div className="relative">

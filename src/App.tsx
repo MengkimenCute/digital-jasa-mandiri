@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -18,6 +17,7 @@ import KarirDetail from "./pages/KarirDetail";
 import JadwalKonsultasi from "./pages/JadwalKonsultasi";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
+import LupaPassword from "./pages/LupaPassword";
 
 // Admin Pages
 import Dashboard from "./pages/admin/Dashboard";
@@ -47,6 +47,7 @@ const App = () => (
           <Route path="/karir/:id" element={<Layout><KarirDetail /></Layout>} />
           <Route path="/jadwal-konsultasi" element={<Layout><JadwalKonsultasi /></Layout>} />
           <Route path="/login" element={<Login />} />
+          <Route path="/lupa-password" element={<LupaPassword />} />
           
           {/* Admin Routes */}
           <Route path="/admin" element={<DashboardLayout><Dashboard /></DashboardLayout>} />
