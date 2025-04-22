@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -7,10 +8,14 @@ import { toast } from "@/hooks/use-toast";
 import { Eye, EyeOff, LogIn, Mail, Lock } from "lucide-react";
 import { createClient } from "@supabase/supabase-js";
 
-const supabase = createClient(
-  import.meta.env.VITE_SUPABASE_URL!, 
-  import.meta.env.VITE_SUPABASE_ANON_KEY!
-);
+// Periksa apakah variabel lingkungan tersedia
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+// Buat client Supabase hanya jika kedua nilai tersedia
+const supabase = supabaseUrl && supabaseAnonKey 
+  ? createClient(supabaseUrl, supabaseAnonKey)
+  : null;
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -24,24 +29,51 @@ const LoginForm = () => {
     setLoading(true);
 
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-
-      if (error) {
+      // Cek apakah supabase client sudah dibuat
+      if (!supabase) {
+        // Jika tidak, tampilkan pesan error tentang konfigurasi
         toast({
-          title: "Login Gagal",
-          description: error.message,
+          title: "Konfigurasi Error",
+          description: "Konfigurasi Supabase tidak lengkap. Pastikan VITE_SUPABASE_URL dan VITE_SUPABASE_ANON_KEY diatur dengan benar di file .env.",
           variant: "destructive",
         });
-      } else if (data.user) {
-        toast({
-          title: "Login Berhasil",
-          description: "Selamat datang di dashboard admin.",
-        });
+        console.error("Supabase client tidak diinisialisasi. Periksa variabel lingkungan.");
         
-        navigate("/admin");
+        // Untuk contoh demo, izinkan login dengan kredensial demo
+        if (email === "admin@example.com" && password === "password") {
+          toast({
+            title: "Login Demo Berhasil",
+            description: "Ini adalah login demo karena Supabase belum dikonfigurasi dengan benar.",
+          });
+          navigate("/admin");
+        } else {
+          toast({
+            title: "Login Gagal",
+            description: "Email atau password salah. Silakan coba lagi.",
+            variant: "destructive",
+          });
+        }
+      } else {
+        // Jika supabase tersedia, gunakan autentikasi Supabase
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
+
+        if (error) {
+          toast({
+            title: "Login Gagal",
+            description: error.message,
+            variant: "destructive",
+          });
+        } else if (data.user) {
+          toast({
+            title: "Login Berhasil",
+            description: "Selamat datang di dashboard admin.",
+          });
+          
+          navigate("/admin");
+        }
       }
     } catch (error) {
       toast({
@@ -49,6 +81,7 @@ const LoginForm = () => {
         description: "Tidak dapat terhubung ke server. Silakan coba lagi nanti.",
         variant: "destructive",
       });
+      console.error("Login error:", error);
     } finally {
       setLoading(false);
     }
