@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -6,6 +5,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 import { Eye, EyeOff, LogIn, Mail, Lock } from "lucide-react";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL!, 
+  import.meta.env.VITE_SUPABASE_ANON_KEY!
+);
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -19,36 +24,32 @@ const LoginForm = () => {
     setLoading(true);
 
     try {
-      // Simulasi login untuk frontend saja
-      setTimeout(() => {
-        if (email === "admin@example.com" && password === "password") {
-          // Login berhasil (simulasi)
-          toast({
-            title: "Login Berhasil",
-            description: "Selamat datang di dashboard admin.",
-          });
-          
-          // Simpan token simulasi di localStorage
-          localStorage.setItem("adminToken", "dummy-token-for-frontend-only");
-          
-          // Redirect ke dashboard admin
-          navigate("/admin");
-        } else {
-          // Login gagal
-          toast({
-            title: "Login Gagal",
-            description: "Email atau password salah. Silakan coba lagi.",
-            variant: "destructive",
-          });
-        }
-        setLoading(false);
-      }, 1500);
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        toast({
+          title: "Login Gagal",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else if (data.user) {
+        toast({
+          title: "Login Berhasil",
+          description: "Selamat datang di dashboard admin.",
+        });
+        
+        navigate("/admin");
+      }
     } catch (error) {
       toast({
         title: "Terjadi Kesalahan",
         description: "Tidak dapat terhubung ke server. Silakan coba lagi nanti.",
         variant: "destructive",
       });
+    } finally {
       setLoading(false);
     }
   };
