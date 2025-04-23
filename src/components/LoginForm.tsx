@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -43,11 +43,11 @@ const LoginForm = () => {
         description: "Anda telah berhasil login menggunakan akun demo.",
       });
       
-      // Allow some time for the toast to be visible
-      setTimeout(() => {
-        navigate("/admin");
-      }, 1000);
+      // Set a token in localStorage to simulate login
+      localStorage.setItem("adminToken", "demo-admin-token");
       
+      // Navigate to admin dashboard immediately
+      navigate("/admin");
       setLoading(false);
       return;
     }
@@ -60,6 +60,7 @@ const LoginForm = () => {
           variant: "destructive",
         });
         console.error("Supabase client tidak diinisialisasi. Periksa variabel lingkungan.");
+        setLoading(false);
       } else {
         const { data, error } = await supabase.auth.signInWithPassword({
           email,
@@ -80,12 +81,17 @@ const LoginForm = () => {
               variant: "destructive",
             });
           }
+          setLoading(false);
         } else if (data.user) {
           toast({
             title: "Login Berhasil",
             description: "Selamat datang di dashboard admin.",
           });
           
+          // Set token in localStorage
+          localStorage.setItem("adminToken", data.session.access_token);
+          
+          // Navigate to the admin area
           navigate("/admin");
         }
       }
@@ -96,10 +102,17 @@ const LoginForm = () => {
         variant: "destructive",
       });
       console.error("Login error:", error);
-    } finally {
       setLoading(false);
     }
   };
+
+  // Check if already logged in
+  useEffect(() => {
+    const adminToken = localStorage.getItem("adminToken");
+    if (adminToken) {
+      navigate("/admin");
+    }
+  }, [navigate]);
 
   return (
     <>
